@@ -21,7 +21,7 @@ const userSchema = new Schema<UserType>({
     type: String,
     required: [true, "Phone number is required"],
     minlength: [10, "Minimum 10-digit phone number is required"],
-    maxlength: [11, "Maximum 11-digit phone number is allowed"],
+    maxlength: [13, "Maximum 13-digit phone number is allowed"],
     unique: true,
   },
   photo: {

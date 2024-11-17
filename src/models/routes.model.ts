@@ -1,11 +1,5 @@
 import mongoose, { Schema, Document, Model, ObjectId } from "mongoose";
-
-export interface RoutesType extends Document {
-  routeNumber: number;
-  routeName: string;
-  stops: ObjectId[];
-  status: "arrival" | "return";
-}
+import { RoutesType } from "../../types/type";
 
 const RoutesSchema: Schema = new Schema({
   routeNumber: {

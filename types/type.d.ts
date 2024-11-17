@@ -23,4 +23,20 @@ interface UserType extends Document {
   createPasswordResetToken(): string;
 }
 
-export { UserType };
+interface LocationType extends Document {
+  latitude: number;
+  longitude: number;
+  address: string;
+  user: ObjectId;
+  createdAt: Date;
+  updatedAt: Date | null;
+}
+
+interface RoutesType extends Document {
+  routeNumber: number;
+  routeName: string;
+  stops: ObjectId[];
+  status: "arrival" | "return";
+}
+
+export { UserType, LocationType, RoutesType };

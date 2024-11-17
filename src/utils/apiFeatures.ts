@@ -52,5 +52,32 @@ class APIFeatures {
 
     return this;
   }
+
+  dateRange() {
+    if (this.queryString.from || this.queryString.to) {
+      const from = new Date(this.queryString.from);
+      const to = new Date(this.queryString.to);
+
+      // If both `from` and `to` are provided, filter by range
+      if (!isNaN(from.getTime()) && !isNaN(to.getTime())) {
+        this.query = this.query.find({
+          created_at: { $gte: from, $lte: to },
+        });
+      }
+      // If only `from` is provided, get all records from that date
+      else if (!isNaN(from.getTime())) {
+        this.query = this.query.find({
+          created_at: { $gte: from },
+        });
+      }
+      // If only `to` is provided, get all records until that date
+      else if (!isNaN(to.getTime())) {
+        this.query = this.query.find({
+          created_at: { $lte: to },
+        });
+      }
+    }
+    return this;
+  }
 }
 export default APIFeatures;

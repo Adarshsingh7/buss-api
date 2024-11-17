@@ -6,6 +6,7 @@ import mongoSanitize from "express-mongo-sanitize";
 import userRouter from "./routes/user.routes";
 import routesRouter from "./routes/routes.routes";
 import stopRouter from "./routes/stop.routes";
+import locationRouter from "./routes/location.routes";
 import globalErrorHandler from "./controllers/error.controller";
 
 import cors from "cors";
@@ -98,6 +99,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/stop", stopRouter);
 app.use("/api/v1/routes", routesRouter);
+app.use("/api/v1/location", locationRouter);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
