@@ -1,8 +1,6 @@
 import nodemailer from "nodemailer";
 import process from "process";
-import dotenv from "dotenv";
 import { forgotPasswordTemplate } from "../utils/email.template";
-dotenv.config({ path: "./../../config.env" });
 
 const config = {
   service: "gmail",
@@ -15,12 +13,6 @@ const config = {
   },
 };
 
-console.log({
-  port: process.env.PORT,
-  user: process.env.EMAIL,
-  pass: process.env.EMAIL_PASSWORD,
-});
-
 // 1) CREATE A TRANSPORTER
 const transporter = nodemailer.createTransport(config);
 
@@ -28,10 +20,11 @@ async function sendEmail(to: string, content: string) {
   // 2) Define an email options
   const mailOptions = {
     from: '"Adarsh | buss-tracking-system" <officialadarsh2021@gmial.com>', // sender address
-    to, // list of receivers
+    to,
     subject: "You got a mail from the adarsh",
     html: forgotPasswordTemplate(content),
   };
+
   try {
     await transporter.sendMail(mailOptions);
     console.log("email sent successfully");
