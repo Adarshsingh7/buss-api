@@ -1,6 +1,7 @@
 import User from "models/user.model";
 import {
   forgotPassword,
+  getMe,
   protect,
   restrictTo,
   signin,
@@ -25,6 +26,7 @@ router.route("/signup").post(signup);
 router.route("/login").post(signin);
 router.post("/forgetPassword", forgotPassword);
 router.post("/updatePassword", updatePassword);
+router.get("/me", protect, getMe);
 
 router.use(protect, restrictTo(["admin"]));
 

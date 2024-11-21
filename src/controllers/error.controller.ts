@@ -28,7 +28,6 @@ const handleDuplicateFieldsDB = (err: Error): AppError => {
 };
 
 const handleValidationErrorDB = (err: Error): AppError => {
-  console.log("handling validation error");
   const errors = Object.values(err.errors || {}).map((el) => el.message);
 
   const message = `Invalid input data. ${errors.join(". ")}`;
@@ -36,7 +35,6 @@ const handleValidationErrorDB = (err: Error): AppError => {
 };
 
 const handleJWTError = (err: Error): AppError => {
-  console.log({ err });
   return new AppError("you are unauthorized, please log in again", 401);
 };
 
@@ -69,13 +67,14 @@ export default (err: Error, req: any, res: any, next: any): void => {
   let error = Object.assign({}, err);
   error.message = err.message;
 
-  console.log(err);
-
   if (err.name === "CastError") error = handleCastErrorDB(err);
   if (err.code === 11000) error = handleDuplicateFieldsDB(err);
   if (err.name === "ValidationError") error = handleValidationErrorDB(err);
   if (err.name === "JsonWebTokenError") error = handleJWTError(err);
   if (err.name === "TokenExpiredError") error = handleTokenExpire();
+  else if (err?.message) {
+    error = new AppError(err.message, 400);
+  }
 
   sendErrorProd(error, req, res);
 };

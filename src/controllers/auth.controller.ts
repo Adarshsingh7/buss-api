@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import crypto from "crypto";
 import process from "process";
 
 import User from "./../models/user.model";
@@ -169,3 +168,11 @@ export const updatePassword = catchAsync(
     });
   },
 );
+
+export const getMe = (req: Request, res: Response, next: NextFunction) => {
+  if (!req.user) return next(new AppError("User not found", 401));
+  res.status(200).json({
+    status: "success",
+    user: req.user,
+  });
+};
