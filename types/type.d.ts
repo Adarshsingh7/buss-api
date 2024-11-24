@@ -36,6 +36,7 @@ interface RoutesType extends Document {
   routeNumber: number;
   routeName: string;
   stops: ObjectId[];
+  user: ObjectId;
   status: "arrival" | "return";
 }
 

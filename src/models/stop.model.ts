@@ -1,10 +1,11 @@
-import mongoose, { Schema, Document, Model } from "mongoose";
+import mongoose, { Schema, Document, Model, ObjectId } from "mongoose";
 
 export interface StopType extends Document {
   latitude: number;
   longitude: number;
   address: string;
-  stopNumber: number;
+  user: ObjectId;
+  name: string;
 }
 
 const StopSchema = new Schema<StopType>({
@@ -20,15 +21,18 @@ const StopSchema = new Schema<StopType>({
     min: [-180, "Longitude must be between -180 and 180"],
     max: [180, "Longitude must be between -180 and 180"],
   },
+  name: {
+    type: String,
+    required: [true, "A stop must have a name"],
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
   address: {
     type: String,
     required: [true, "Address is required"],
     trim: true,
-  },
-  stopNumber: {
-    type: Number,
-    required: [true, "StopType number is required"],
-    unique: true,
   },
 });
 

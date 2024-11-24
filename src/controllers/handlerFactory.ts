@@ -4,6 +4,14 @@ import APIFeatures from "../utils/apiFeatures";
 import { Request, Response, NextFunction } from "express";
 import { Model as MongooseModel } from "mongoose";
 
+export const attachUser = (req: Request, res: Response, next: NextFunction) => {
+  const user = req.user;
+  if (req.body) {
+    req.body.user = user?._id;
+  }
+  next();
+};
+
 export const deleteOne = (Model: MongooseModel<any>) =>
   catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const doc = await Model.findByIdAndDelete(req.params.id);

@@ -6,6 +6,7 @@ const RoutesSchema: Schema = new Schema({
     type: Number,
     required: [true, "Route number is required"],
     min: [1, "Route number must be at least 1"],
+    unique: true,
   },
   stops: [
     {
@@ -14,6 +15,10 @@ const RoutesSchema: Schema = new Schema({
       unique: true,
     },
   ],
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
   routeName: {
     type: String,
     required: [true, "Route name is required"],

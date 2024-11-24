@@ -6,10 +6,14 @@ import {
   getRoutes,
   updateRoutes,
 } from "../controllers/routes.controller";
+import { protect } from "../controllers/auth.controller";
+import { attachUser } from "../controllers/handlerFactory";
 
 const router = Router();
 
-router.route("/").get(getAllRoutes).post(createRoutes);
+router.use(protect);
+
+router.route("/").get(getAllRoutes).post(attachUser, createRoutes);
 router.route("/:id").get(getRoutes).patch(updateRoutes).delete(deleteRoutes);
 
 export default router;
