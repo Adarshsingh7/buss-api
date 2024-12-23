@@ -1,11 +1,13 @@
 import mongoose, { Schema, Document, Model, ObjectId } from "mongoose";
 
 export interface StopType extends Document {
+  name: string;
+  address: string;
+  arrivial: string;
   latitude: number;
   longitude: number;
-  address: string;
   user: ObjectId;
-  name: string;
+  distance: number;
 }
 
 const StopSchema = new Schema<StopType>({
@@ -33,6 +35,16 @@ const StopSchema = new Schema<StopType>({
     type: String,
     required: [true, "Address is required"],
     trim: true,
+  },
+  arrivial: {
+    type: String,
+    trim: true,
+    default: "0:00",
+  },
+  distance: {
+    type: Number,
+    default: 0,
+    min: [0, "Distance cannot be negative"],
   },
 });
 

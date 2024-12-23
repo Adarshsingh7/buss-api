@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import { Server } from "http";
-dotenv.config({ path: "./src/config.env" });
+dotenv.config({ path: "./src/.env" });
 import app from "./src/app";
 import mongoose from "mongoose";
 
@@ -13,7 +13,7 @@ process.on("uncaughtException", (err: Error) => {
 const port = process.env.PORT || 8080;
 
 mongoose
-  .connect(process.env.DATABASE_LOCAL as string)
+  .connect(process.env.DATABASE_REMOTE as string)
   .then(() => console.info("DB connection successful!"))
   .catch((err) => console.error(err));
 
