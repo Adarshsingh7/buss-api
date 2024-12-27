@@ -2,6 +2,7 @@
 
 **School Bus Tracking App** designed to enhance student safety, optimize route management, and improve communication between parents, students, bus drivers, and school administrators. With real-time GPS tracking and instant notifications, ZuzzBuzz ensures peace of mind for all stakeholders.
 
+![ZuzzBuzz Database ER Model](zuzzbuzz_database.png)
 ---
 
 ## 🌟 Key Features
