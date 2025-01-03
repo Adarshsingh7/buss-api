@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
-import { Server } from "http";
 dotenv.config({ path: "./src/.env" });
+import { Server } from "http";
 import app from "./src/app";
 import mongoose from "mongoose";
 
@@ -10,6 +10,7 @@ process.on("uncaughtException", (err: Error) => {
   process.exit(1);
 });
 
+console.log("Environment Variables:", process.env.PORT);
 const port = process.env.PORT || 8080;
 
 mongoose
