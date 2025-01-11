@@ -1,8 +1,9 @@
 import dotenv from "dotenv";
-import { Server } from "http";
 dotenv.config({ path: "./src/.env" });
 import app from "./src/app";
 import mongoose from "mongoose";
+import { createServer } from "http";
+import { Server } from "socket.io";
 
 process.on("uncaughtException", (err: Error) => {
   console.log("UNCAUGHT EXCEPTION! 💥 Shutting down...");
@@ -12,12 +13,24 @@ process.on("uncaughtException", (err: Error) => {
 
 const port = process.env.PORT || 8080;
 
+const server = createServer(app);
+const io = new Server(server);
+
+io.on("connection", (socket) => {
+  console.log(socket.id);
+  console.log("New connection!");
+  socket.on("user-message", (message) => {
+    console.log(message);
+    io.emit("user-message", message);
+  });
+});
+
 mongoose
   .connect(process.env.DATABASE_REMOTE as string)
   .then(() => console.info("DB connection successful!"))
   .catch((err) => console.error(err));
 
-const server: Server = app.listen(port, () => {
+app.listen(port, () => {
   console.info(`App running peacefully on port ${port}...`);
 });
 
