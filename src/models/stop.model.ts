@@ -8,6 +8,7 @@ export interface StopType extends Document {
   longitude: number;
   user: ObjectId;
   distance: number;
+  arrivalStatus: "arrived" | "waiting";
 }
 
 const StopSchema = new Schema<StopType>({
@@ -36,6 +37,12 @@ const StopSchema = new Schema<StopType>({
     required: [true, "Address is required"],
     trim: true,
   },
+  arrivalStatus: {
+    type: String,
+    enum: ["arrived", "waiting"],
+    default: "waiting",
+  },
+  // arrival time of the buss it is string but later must be converted to time
   arrivial: {
     type: String,
     trim: true,
