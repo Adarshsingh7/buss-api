@@ -18,13 +18,9 @@ export const updateLocation = updateOne(Location);
 export const deleteLocation = deleteOne(Location);
 
 export const getDerivedLocation = catchAsync(
-  async (
-    req: Request<{}, {}, { user: string; route: string }>,
-    res: Response,
-    next: NextFunction,
-  ) => {
-    const user = req.body.user;
-    const route = req.body.route;
+  async (req: Request, res: Response, next: NextFunction) => {
+    const user = req.query.user as string;
+    const route = req.query.route as string;
 
     if (!user && !route) {
       return next(new AppError("There must be a user in the body", 400));
