@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from "express";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import mongoSanitize from "express-mongo-sanitize";
+import morgan from "morgan";
 
 import userRouter from "./routes/user.routes";
 import routesRouter from "./routes/routes.routes";
@@ -74,6 +75,7 @@ app.use(
   }),
 );
 app.use(cors());
+app.use(morgan("dev"));
 
 const limiter = rateLimit({
   max: 100,

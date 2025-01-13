@@ -6,6 +6,11 @@ const locationSchema = new Schema<LocationType>({
   latitude: Number,
   longitude: Number,
   address: String,
+  route: {
+    type: Schema.Types.ObjectId,
+    ref: "Route",
+    unique: true,
+  },
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
@@ -13,7 +18,7 @@ const locationSchema = new Schema<LocationType>({
   },
   createdAt: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
   },
   updatedAt: Date,
 });

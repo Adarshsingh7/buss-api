@@ -26,6 +26,7 @@ interface UserType extends Document {
 interface LocationType extends Document {
   latitude: number;
   longitude: number;
+  route: ObjectId;
   address: string;
   user: ObjectId;
   createdAt: Date;
