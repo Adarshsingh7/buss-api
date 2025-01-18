@@ -79,7 +79,7 @@ app.use(morgan("dev"));
 
 const limiter = rateLimit({
   max: 100,
-  windowMs: 60 * 1000, // for 1 hour user can send only 100 requests
+  windowMs: 60 * 1000, // for 1 min user can send only 100 requests
   message: "Too many requests from this IP, please try again after a minute",
 });
 
