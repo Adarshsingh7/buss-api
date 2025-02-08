@@ -28,7 +28,9 @@ export const getDerivedLocation = catchAsync(
     if (route) {
       const location = await Location.findOne({ route: route });
       if (!location)
-        return next(new AppError(`Location with ${route} not found`, 404));
+        return next(
+          new AppError(`Location with routeId ${route} not found`, 404),
+        );
 
       res.status(200).json({ status: "success", data: location });
     } else {
