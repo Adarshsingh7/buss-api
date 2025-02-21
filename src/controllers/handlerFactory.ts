@@ -28,6 +28,7 @@ export const deleteOne = (Model: MongooseModel<any>) =>
 
 export const updateOne = (Model: MongooseModel<any>) =>
   catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    console.log(req.params.id, req.body);
     const document = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
@@ -42,6 +43,7 @@ export const updateOne = (Model: MongooseModel<any>) =>
       data: document,
       upload: res.locals,
     });
+    console.log("updated");
   });
 
 export const createOne = (Model: MongooseModel<any>) =>

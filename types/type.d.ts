@@ -41,4 +41,14 @@ interface RoutesType extends Document {
   status: "arrival" | "return";
 }
 
+interface School extends Document {
+  name: string;
+  address: string;
+  phone: string;
+  email: string;
+  logo: string;
+  schoolCode: string;
+  isActive: boolean;
+}
+
 export { UserType, LocationType, RoutesType };
