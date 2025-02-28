@@ -34,5 +34,6 @@ export const isWithinRange = function (
   const distanceInMeters = distance * 1000;
 
   // Check if within the range
+  console.log(distanceInMeters <= rangeInMeters);
   return distanceInMeters <= rangeInMeters;
 };
