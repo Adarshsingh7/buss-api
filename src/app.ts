@@ -7,7 +7,7 @@ import morgan from "morgan";
 import userRouter from "./routes/user.routes";
 import routesRouter from "./routes/routes.routes";
 import stopRouter from "./routes/stop.routes";
-import locationRouter from "./routes/location.routes";
+// import locationRouter from "./routes/location.routes";
 import globalErrorHandler from "./controllers/error.controller";
 import uploadRouter from "./routes/upload.routes";
 
@@ -74,7 +74,7 @@ app.use(
     },
   }),
 );
-app.use(cors());
+app.use(cors({ origin: "http://localhost:5173" }));
 app.use(morgan("dev"));
 
 const limiter = rateLimit({
@@ -103,7 +103,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/stop", stopRouter);
 app.use("/api/v1/routes", routesRouter);
-app.use("/api/v1/location", locationRouter);
+// app.use("/api/v1/location", locationRouter);
 app.use("/api/v1/upload", uploadRouter);
 
 app.all("*", (req, res, next) => {
