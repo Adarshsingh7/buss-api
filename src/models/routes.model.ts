@@ -15,9 +15,9 @@ const RoutesSchema: Schema = new Schema({
       unique: true,
     },
   ],
-  user: {
+  school: {
     type: Schema.Types.ObjectId,
-    ref: "User",
+    ref: "School",
   },
   routeName: {
     type: String,
@@ -28,7 +28,7 @@ const RoutesSchema: Schema = new Schema({
     type: String,
     required: [true, "Status is required"],
     enum: {
-      values: ["arrival", "return"],
+      values: ["idle", "arrival", "return"],
       message: 'Status must be either "arrival" or "return"',
     },
   },

@@ -6,7 +6,7 @@ export interface StopType extends Document {
   arrivial: string;
   latitude: number;
   longitude: number;
-  user: ObjectId;
+  school: ObjectId;
   distance: number;
   arrivalStatus: "arrived" | "waiting";
 }
@@ -28,9 +28,9 @@ const StopSchema = new Schema<StopType>({
     type: String,
     required: [true, "A stop must have a name"],
   },
-  user: {
+  school: {
     type: Schema.Types.ObjectId,
-    ref: "User",
+    ref: "School",
   },
   address: {
     type: String,

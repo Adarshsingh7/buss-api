@@ -7,7 +7,8 @@ interface UserType extends Document {
   photo: string;
   route: ObjectId | null;
   stop: ObjectId | null;
-  role: "student" | "driver" | "admin";
+  role: "student" | "driver" | "admin" | "super-admin";
+  school: ObjectId | null;
   password: string;
   passwordConfirm?: string; // Made optional to handle the case after validation
   isActive: boolean;
@@ -37,11 +38,11 @@ interface RoutesType extends Document {
   routeNumber: number;
   routeName: string;
   stops: ObjectId[];
-  user: ObjectId;
+  school: ObjectId;
   status: "arrival" | "return";
 }
 
-interface School extends Document {
+interface SchoolType extends Document {
   name: string;
   address: string;
   phone: string;
@@ -51,4 +52,4 @@ interface School extends Document {
   isActive: boolean;
 }
 
-export { UserType, LocationType, RoutesType };
+export { UserType, LocationType, RoutesType, SchoolType };

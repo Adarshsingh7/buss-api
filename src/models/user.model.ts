@@ -31,7 +31,7 @@ const userSchema = new Schema<UserType>({
   },
   role: {
     type: String,
-    enum: ["student", "driver", "admin"],
+    enum: ["student", "driver", "admin", "super-admin"],
     required: [true, "Role is required"],
   },
   route: {
@@ -59,6 +59,11 @@ const userSchema = new Schema<UserType>({
       },
       message: "Passwords do not match",
     },
+  },
+  school: {
+    type: Schema.Types.ObjectId,
+    ref: "School",
+    default: null,
   },
   isActive: {
     type: Boolean,
