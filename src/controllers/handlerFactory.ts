@@ -73,7 +73,7 @@ export const getOne = (Model: MongooseModel<any>, popOptions?: any) =>
 
 export const getAll = (Model: MongooseModel<any>) =>
   catchAsync(async (req: Request, res: Response) => {
-    console.log({ Model });
+    console.log(req.query);
     const features = new APIFeatures(Model.find(), req.query)
       .filter()
       .sort()

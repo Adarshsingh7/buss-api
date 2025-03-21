@@ -28,7 +28,7 @@ router.post("/forgetPassword", forgotPassword);
 router.post("/updatePassword", updatePassword);
 router.get("/me", protect, getMe);
 
-router.use(protect, restrictTo(["admin"]));
+router.use(protect, restrictTo(["admin", "super-admin"]));
 
 router.route("/").get(getAllUser).post(createUser).post(createUser);
 router.route("/:id").get(getUser).patch(updateUser).delete(deleteUser);
