@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import mongoose, { Document, Model, ObjectId, Schema } from "mongoose";
+import mongoose, { Document, Model, ObjectId, Query, Schema } from "mongoose";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 import { UserType } from "../../types/type";
@@ -75,10 +75,10 @@ const userSchema = new Schema<UserType>({
   passwordChangedAt: Date,
 });
 
-// userSchema.pre(/^find/, function (next) {
-//   this.find({ isActive: { $ne: false } });
-//   next();
-// });
+userSchema.pre(/^find/, function (this: Query<UserType, UserType>, next) {
+  this.find({ isActive: { $ne: false } });
+  next();
+});
 
 // Middleware: Hash password before saving
 userSchema.pre("save", async function (next) {

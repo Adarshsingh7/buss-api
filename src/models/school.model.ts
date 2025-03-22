@@ -1,4 +1,4 @@
-import mongoose, { Model, Schema } from "mongoose";
+import mongoose, { Model, Query, Schema } from "mongoose";
 import { SchoolType } from "../../types/type";
 
 const schoolSchema = new Schema<SchoolType>({
@@ -26,6 +26,8 @@ const schoolSchema = new Schema<SchoolType>({
   },
   logo: {
     type: String,
+    default:
+      "https://res.cloudinary.com/decczwgne/image/upload/v1738167328/default_yabbiu.jpg",
     required: [true, "School logo is required"],
     unique: true,
   },
@@ -38,6 +40,11 @@ const schoolSchema = new Schema<SchoolType>({
     type: Boolean,
     default: true,
   },
+});
+
+schoolSchema.pre(/^find/, function (this: Query<SchoolType, SchoolType>, next) {
+  this.where({ isActive: { $ne: false } }); // Use `.where()` instead of `.find()`
+  next();
 });
 
 const School: Model<SchoolType> = mongoose.model("School", schoolSchema);

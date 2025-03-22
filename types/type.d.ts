@@ -15,7 +15,7 @@ interface UserType extends Document {
   passwordResetToken?: string;
   passwordResetExpires?: Date;
   passwordChangedAt?: Date;
-
+  expoPushToken?: string;
   correctPassword(
     candidatePassword: string,
     userPassword: string,

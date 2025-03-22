@@ -8,6 +8,11 @@ const RoutesSchema: Schema = new Schema({
     min: [1, "Route number must be at least 1"],
     unique: true,
   },
+  routeName: {
+    type: String,
+    required: [true, "Route name is required"],
+    trim: true,
+  },
   stops: [
     {
       type: Schema.Types.ObjectId,
@@ -18,11 +23,6 @@ const RoutesSchema: Schema = new Schema({
   school: {
     type: Schema.Types.ObjectId,
     ref: "School",
-  },
-  routeName: {
-    type: String,
-    required: [true, "Route name is required"],
-    trim: true,
   },
   status: {
     type: String,
